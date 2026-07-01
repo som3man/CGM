@@ -68,11 +68,10 @@ namespace CGM {
                 .Scale(scale);
         }
 
-        nodiscard static constexpr Matrix View(const Vector3<Type>& position, const Rotation& rotation, const Vector3<Type>& scale) noexcept {
+        nodiscard static constexpr Matrix View(const Vector3<Type>& position, const Rotation& rotation) noexcept {
             static_assert(size == 4 && std::is_signed_v<Type>);
 
             return Matrix()
-                .Scale(-scale)
                 .Rotate(-rotation)
                 .Translate(-position);
         }
@@ -84,12 +83,12 @@ namespace CGM {
 
             result[0][0] = Type(2) / (max.x() - min.x());
             result[1][1] = Type(2) / (max.y() - min.y());
-            result[2][2] = -Type(2) / (far - near);
+            result[2][2] = -Type(1) / (far - near);
             
             result[3] = {
                 -(max.x() + min.x()) / (max.x() - min.x()),
                 -(max.y() + min.y()) / (max.y() - min.y()),
-                -(far - near) / (far - near),
+                -near / (far - near),
                 Type(1)
             };
 
@@ -111,7 +110,7 @@ namespace CGM {
             Matrix result = {};
 
             result[0][0] = Type(1) / (aspect * tan);
-            result[1][1] = -Type(1) / tan;
+            result[1][1] = Type(1) / tan;
             result[2][2] = -(far + near) / (far - near);
             result[2][3] = -Type(1);
             result[3][2] = -(Type(2) * far * near) / (far - near);
@@ -410,11 +409,11 @@ namespace CGM {
         }
 
         constexpr Matrix& RotatePitch(angle pitch) noexcept {
-            return Rotate(pitch, { 1.0f, 0.0f, 0.0f });
+            return Rotate(pitch, { 0.0f, 1.0f, 0.0f });
         }
 
         constexpr Matrix& RotateYaw(angle yaw) noexcept {
-            return Rotate(yaw, { 0.0f, 1.0f, 0.0f });
+            return Rotate(yaw, { 1.0f, 0.0f, 0.0f });
         }
 
         constexpr Matrix& RotateRoll(angle roll) noexcept {

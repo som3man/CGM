@@ -67,8 +67,6 @@ namespace CGM {
                 else
                     data[3] = Type();
             }
-
-            return *this;
         }
 
         constexpr Vector(Type value) noexcept {
@@ -250,11 +248,11 @@ namespace CGM {
         }
 
         constexpr Vector& RotatePitch(angle pitch) noexcept {
-            return Rotate(pitch, { 1.0f, 0.0f, 0.0f });
+            return Rotate(pitch, { 0.0f, 1.0f, 0.0f });
         }
 
         constexpr Vector& RotateYaw(angle yaw) noexcept {
-            return Rotate(yaw, { 0.0f, 1.0f, 0.0f });
+            return Rotate(yaw, { 1.0f, 0.0f, 0.0f });
         }
 
         constexpr Vector& RotateRoll(angle roll) noexcept {

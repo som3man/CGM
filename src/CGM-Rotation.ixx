@@ -152,11 +152,11 @@ namespace CGM {
         }
 
         constexpr Rotation& RotatePitch(angle pitch) noexcept {
-            return Rotate(FromAxis(pitch, { 1.0f, 0.0f, 0.0f }));
+            return Rotate(FromAxis(pitch, { 0.0f, 1.0f, 0.0f }));
         }
 
         constexpr Rotation& RotateYaw(angle yaw) noexcept {
-            return Rotate(FromAxis(yaw, { 0.0f, 1.0f, 0.0f }));
+            return Rotate(FromAxis(yaw, { 1.0f, 0.0f, 0.0f }));
         }
 
         constexpr Rotation& RotateRoll(angle roll) noexcept {
